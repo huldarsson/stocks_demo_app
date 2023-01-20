@@ -31,9 +31,6 @@ class StocksRepository {
 
   Future<DetailedStockModel> getDetailedStockModel(String symbol) async {
     DetailedStockModel stock = await _stocksApi.getDetailedStock(symbol);
-
-    //Delay to not spam api
-    await Future.delayed(const Duration(milliseconds: 1000));
     PriceModel price = await _stocksApi.getCurrentPrice(symbol);
     stock = stock.copyWith(price: price);
     return stock;
